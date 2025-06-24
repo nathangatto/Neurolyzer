@@ -1,0 +1,22 @@
+# GUI framework and tools
+PyQt5               # Main GUI framework
+# ABF file handling
+pyABF               # Read and analyse ABF electrophysiology files
+# Scientific computing
+numpy               # Core numerical calculations
+scipy               # Signal processing and analysis functions
+pandas              # DataFrames and CSV handling
+matplotlib          # Plotting and visualisation
+pyqtgraph           # Fast plotting for PyQt
+pywavelets          # Wavelet transforms for signal analysis
+tftb                # Time-Frequency Toolbox (for ZAP, spectral analysis)
+neurodsp            # DSP functions for neuroscience signals
+# File and database storage
+duckdb              # Lightweight SQL database for online session saving
+pyarrow             # Parquet format support for exporting large data
+# Security
+bcrypt              # Password hashing (for future user login system)
+# Environment config
+python-dotenv       # Load environment variables from .env file
+joblib              # Saves session
+pyinstaller         # Creates Deployable Application

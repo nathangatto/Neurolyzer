@@ -1,0 +1,30 @@
+[2025-05-28 16:21:14] File: /Users/nathangatto/Documents/__/Uni/Professional Experience/PX_Github/Data for software X/K+ clearance/Valeria/#6550_15mM_hippocampus1_aCSF_BaCl2_edited.abf
+Pre-Load SHA256: 952612a423ca559f255d52801fa4847917ced4735bee9c5cc837b2f43b6ab841
+Post-Load SHA256: 952612a423ca559f255d52801fa4847917ced4735bee9c5cc837b2f43b6ab841
+Match: YES
+
+[2025-05-28 16:21:14] File: /Users/nathangatto/Documents/__/Uni/Professional Experience/PX_Github/Data for software X/K+ clearance/Valeria/#6550_15mM_hippocampus1_aCSF_BaCl2_edited.abf
+Pre-Load SHA256: 952612a423ca559f255d52801fa4847917ced4735bee9c5cc837b2f43b6ab841
+Post-Load SHA256: 952612a423ca559f255d52801fa4847917ced4735bee9c5cc837b2f43b6ab841
+Match: YES
+
+[2025-05-28 16:22:00] File: /Users/nathangatto/Documents/__/Uni/Professional Experience/PX_Github/Data for software X/Extracellular/AO kcl _0000.abf
+Pre-Load SHA256: 395df494a1cc56e7ca0cadc765987872a7c6373184bce951851f964a8039e977
+Post-Load SHA256: 395df494a1cc56e7ca0cadc765987872a7c6373184bce951851f964a8039e977
+Match: YES
+
+[2025-05-28 16:22:00] File: /Users/nathangatto/Documents/__/Uni/Professional Experience/PX_Github/Data for software X/Extracellular/AO kcl _0000.abf
+Pre-Load SHA256: 395df494a1cc56e7ca0cadc765987872a7c6373184bce951851f964a8039e977
+Post-Load SHA256: 395df494a1cc56e7ca0cadc765987872a7c6373184bce951851f964a8039e977
+Match: YES
+
+[2025-05-28 16:22:05] File: /Users/nathangatto/Documents/__/Uni/Professional Experience/PX_Github/Data for software X/Extracellular/AO kcl _0001.abf
+Pre-Load SHA256: bac2a1d7cfc503c6260fd90ef419d4af29f0ba54d2c0c28e9b1979c0a373012b
+Post-Load SHA256: bac2a1d7cfc503c6260fd90ef419d4af29f0ba54d2c0c28e9b1979c0a373012b
+Match: YES
+
+[2025-05-28 16:22:05] File: /Users/nathangatto/Documents/__/Uni/Professional Experience/PX_Github/Data for software X/Extracellular/AO kcl _0001.abf
+Pre-Load SHA256: bac2a1d7cfc503c6260fd90ef419d4af29f0ba54d2c0c28e9b1979c0a373012b
+Post-Load SHA256: bac2a1d7cfc503c6260fd90ef419d4af29f0ba54d2c0c28e9b1979c0a373012b
+Match: YES
+
