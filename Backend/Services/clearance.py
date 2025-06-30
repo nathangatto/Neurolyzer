@@ -135,6 +135,22 @@ class ClearanceSession:
             raise RuntimeError(res.message)
         return res.x
  
+    @staticmethod
+    def _weighted_tau(amps: list[float], taus: list[float]) -> float | None:
+            """
+            Return the amplitude-weighted decay constant
+
+                τ_w = Σ A_i τ_i / Σ A_i
+
+            or None if lists are empty / badly shaped.
+            """
+            if not amps or not taus or len(amps) != len(taus):
+                return None
+            weights = [abs(A) for A in amps]
+            denom = sum(weights)
+            if denom == 0:
+                return None
+            return sum(w * t for w, t in zip(weights, taus)) / denom
 
     @staticmethod
     def _exp_decay(t, A, tau, C):
@@ -275,6 +291,8 @@ class ClearanceSession:
 
             # Compute Δ[K⁺] so we can derive the 90 % and 10 % thresholds
             delta_k = k_peak - k_baseline
+            k90 = k_baseline + 0.9 * delta_k
+            k10 = k_baseline + 0.1 * delta_k
 
             if self.fit_domain == "voltage":
                 # work in VOLTAGE (mV) all the way down  ↓↓↓
@@ -372,10 +390,7 @@ class ClearanceSession:
             amps = list(amps); taus = list(taus)
             lam = [1.0 / t for t in taus] 
 
-            T3 = None
-            if len(taus) >= 2:
-                T1, T2 = taus[:2]
-                T3 = (T1 * T2) / (T1 + T2)
+            tau_weighted = self._weighted_tau(amps, taus)
 
             # ─── 4 · make the fitted curve & optionally extend it ──────────────────
             fit_x = seg_x
@@ -431,7 +446,7 @@ class ClearanceSession:
                 # fitted parameters
                 "tau":         taus,
                 "lambda":      lam,
-                "T3"    : T3, 
+                "tau_weighted"    : tau_weighted, 
                 "r2":          float(r2),
                 "amps":       amps,
                 "C":          C_fit,   
@@ -561,6 +576,9 @@ class ClearanceSession:
             *coeffs, C_fit = p_fit
             amps = coeffs[::2]
             taus = coeffs[1::2]
+        
+        # NEW – amplitude-weighted effective τ
+        tau_weighted = self._weighted_tau(amps, taus)
 
         y_fit = fit_fun(x_local, *p_fit)
 
@@ -577,6 +595,7 @@ class ClearanceSession:
             "fitted": y_fit,
             "tau"   : taus,
             "lambda": [1.0 / t for t in taus],
+            "tau_weighted": tau_weighted,
             "amps"  : amps,
             "C"     : C_fit,
             "r2"    : float(r2),
@@ -795,4 +814,3 @@ class ClearanceSession:
         else:
             return False, f"Calibration unstable (deviation: {deviation:.1f}% > 20%)"
         
-

@@ -580,13 +580,14 @@ class IxDPlotArea(QWidget):
 
             # ── 6 · τ / R² label ─────────────────────────────────────────
             tau_str, lam_str = self._tau_lambda_strings(r)
-            T3_str = f"{r['T3']:.2f}" if r.get('T3') is not None else "—"
+            tw_str = f"{r['tau_weighted']:.2f}"
             text = (
                 f"τ={tau_str}s\n"
                 f"R²={r['r2']:.3f}\n"
                 f"λ={lam_str}s⁻¹\n"
-                f"T₃={T3_str}s"
+                f"τ𝚠={tw_str}s"           # amplitude-weighted τ
             )
+
             label = pg.TextItem(text, color=(220, 0, 0), anchor=(0, 1))
             pw.addItem(label)
             label.setPos(slice_x[0], r["seg_y"][0] * 1.05)
@@ -721,13 +722,15 @@ class IxDPlotArea(QWidget):
 
         #  τ / R² label
         tau_str, lam_str = self._tau_lambda_strings(r)
-        T3_str = f"{r['T3']:.2f}" if r.get('T3') is not None else "—"
+        tw = r.get('tau_weighted')
+        tw_str = f"{tw:.2f}" if tw is not None else "-"
         text = (
-                f"τ={tau_str}s\n"
-                f"R²={r['r2']:.3f}\n"
-                f"λ={lam_str}s⁻¹\n"
-                f"T₃={T3_str}s"
-            )
+            f"τ={tau_str}s\n"
+            f"R²={r['r2']:.3f}\n"
+            f"λ={lam_str}s⁻¹\n"
+            f"τ𝚠={tw_str}s"           # amplitude-weighted τ
+        )
+
         lbl = pg.TextItem(
             text,
             color=(220,0,0), anchor=(0, 1)
@@ -993,7 +996,7 @@ class IxDPlotArea(QWidget):
         
         # Draw primary trace
         r1 = self.current_results[seg_idx]
-        self._redraw_segment(pw, r1, is_overlay=False)
+        self._redraw_segment(pw, r1)
         
         # Draw overlay if exists
         if self.comparison_results and seg_idx < len(self.comparison_results):
