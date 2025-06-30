@@ -37,6 +37,7 @@ def results_to_csv(results: list[dict], out_dir: str | Path) -> Path:
         "T3":            r.get("T3"),
         "λ = 1/τ":       r.get("lambda"),
         "tw (weighted)": r.get("tau_weighted"),
+        "λ𝚠 (weighted)": r.get("lambda_weighted"),
         "Decay 90→10%":  r.get("decay_time"),
         "R² (fit)":      r.get("r2"),
     } for r in results])

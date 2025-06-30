@@ -580,13 +580,18 @@ class IxDPlotArea(QWidget):
 
             # ── 6 · τ / R² label ─────────────────────────────────────────
             tau_str, lam_str = self._tau_lambda_strings(r)
-            tw_str = f"{r['tau_weighted']:.2f}"
+            tw = r.get('tau_weighted')              # may be None
+            lw = None if tw in (None, 0) else 1.0 / tw
+            tw_str = f"{tw:.2f}" if tw not in (None, 0) else "-"
+            lw_str = f"{lw:.3f}" if lw is not None     else "-"
             text = (
                 f"τ={tau_str}s\n"
                 f"R²={r['r2']:.3f}\n"
                 f"λ={lam_str}s⁻¹\n"
-                f"τ𝚠={tw_str}s"           # amplitude-weighted τ
+                f"τ𝚠={tw_str}s\n"
+                f"λ𝚠={lw_str}s⁻¹"
             )
+
 
             label = pg.TextItem(text, color=(220, 0, 0), anchor=(0, 1))
             pw.addItem(label)
@@ -722,14 +727,21 @@ class IxDPlotArea(QWidget):
 
         #  τ / R² label
         tau_str, lam_str = self._tau_lambda_strings(r)
-        tw = r.get('tau_weighted')
-        tw_str = f"{tw:.2f}" if tw is not None else "-"
+        # ── after  tau_str, lam_str  ─────────────────────────────
+        tw = r.get('tau_weighted')              # may be None
+        lw = None if tw in (None, 0) else 1.0 / tw
+
+        tw_str = f"{tw:.2f}" if tw not in (None, 0) else "-"
+        lw_str = f"{lw:.3f}" if lw is not None     else "-"
+
         text = (
             f"τ={tau_str}s\n"
             f"R²={r['r2']:.3f}\n"
             f"λ={lam_str}s⁻¹\n"
-            f"τ𝚠={tw_str}s"           # amplitude-weighted τ
+            f"τ𝚠={tw_str}s\n"
+            f"λ𝚠={lw_str}s⁻¹"
         )
+
 
         lbl = pg.TextItem(
             text,

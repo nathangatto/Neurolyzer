@@ -391,6 +391,8 @@ class ClearanceSession:
             lam = [1.0 / t for t in taus] 
 
             tau_weighted = self._weighted_tau(amps, taus)
+            lambda_weighted = None if tau_weighted in (None, 0) else 1.0 / tau_weighted
+
 
             # ─── 4 · make the fitted curve & optionally extend it ──────────────────
             fit_x = seg_x
@@ -446,7 +448,8 @@ class ClearanceSession:
                 # fitted parameters
                 "tau":         taus,
                 "lambda":      lam,
-                "tau_weighted"    : tau_weighted, 
+                "tau_weighted"    : tau_weighted,
+                "lambda_weighted" : lambda_weighted,
                 "r2":          float(r2),
                 "amps":       amps,
                 "C":          C_fit,   
@@ -579,6 +582,8 @@ class ClearanceSession:
         
         # NEW – amplitude-weighted effective τ
         tau_weighted = self._weighted_tau(amps, taus)
+        lambda_weighted = None if tau_weighted in (None, 0) else 1.0 / tau_weighted
+
 
         y_fit = fit_fun(x_local, *p_fit)
 
@@ -596,6 +601,7 @@ class ClearanceSession:
             "tau"   : taus,
             "lambda": [1.0 / t for t in taus],
             "tau_weighted": tau_weighted,
+            "lambda_weighted": lambda_weighted,
             "amps"  : amps,
             "C"     : C_fit,
             "r2"    : float(r2),

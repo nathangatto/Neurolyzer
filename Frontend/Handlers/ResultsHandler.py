@@ -20,6 +20,7 @@ class ResultHandler:
         peak       = r.get('peak', float('nan'))
         t0         = r.get('t0', float('nan'))
         tau_w = r.get('tau_weighted', float('nan'))
+        lam_w = r.get('lambda_weighted', float('nan'))
         v0         = r.get('v_baseline', float('nan'))
         vp         = r.get('v_peak', float('nan'))
         dv         = r.get('delta_v', float('nan'))
@@ -109,6 +110,8 @@ class ResultHandler:
             self.clearance["delay_time"].append(r['decay_time'])
             self.clearance["A_str"].append(A_str)
             self.clearance["tau_weighted"].append(tau_w)
+            self.clearance["lambda_weighted"].append(lam_w)
+
 
 
         self.results["Analysis Type"].append(f"Segment {idx} ")
@@ -126,6 +129,7 @@ class ResultHandler:
             f"    • τ (Tau)              : {tau_s_str} s   ({tau_ms_str} ms)\n"
             f"    • λ = 1/τ              : {lam_s_str} s⁻¹   ({lam_ms_str} ms⁻¹)\n"
             f"    • τ𝚠 (weighted)         : {tau_w:.2f} s\n"
+            f"    • λ𝚠 (weighted)       : {lam_w:.3f} s⁻¹\n"
             f"    • Decay 90→10 %        : {r['decay_time']:.2f} s\n"
             f"    • R² (fit)             : {r['r2']:.3f}\n"
             f"    • A (mV)               : {A_str}\n"
@@ -146,6 +150,7 @@ class ResultHandler:
             f"\t• τ (Tau)\t\t :{tau_s_str} s   \t({tau_ms_str} ms)\n"
             f"\t• λ = 1/τ \t\t :{lam_s_str} s⁻¹  ({lam_ms_str} ms⁻¹)\n"
             f"\t• τ𝚠 (weighted)\t\t :{tau_w:.2f} s\n"
+            f"\t• λ𝚠 (weighted)\t\t :{lam_w:.2f} s\n"
             f"\t• Decay 90→10 % \t :{r['decay_time']:.2f} s\n"
             f"\t• R² (fit)\t\t :{r['r2']:.3f}\n"
             f"\t• A (mV)\t\t :{A_str}\n"
